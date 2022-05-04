@@ -28,12 +28,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              environment.googleClientID
+              environment.googleClientId
             )
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('clientId')
+            provider: new FacebookLoginProvider(environment.fbAppId)
           }
         ],
         onError: (err: unknown) => {

@@ -23,6 +23,8 @@ export class AuthenticationComponent implements OnInit {
   }
 
   signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(() => {
+      this.router.navigate(['./dashboard']);
+    });
   }
 }

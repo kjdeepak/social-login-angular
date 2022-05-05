@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
+import { StorageKeys } from '../_core/models/interface';
 import { AuthService } from '../_core/services/auth.service';
 
 @Component({
@@ -38,7 +39,7 @@ export class DashboardComponent implements OnInit {
   }
 
   clearUserDataAndNavigateToLoginPage(): void {
-    localStorage.removeItem('socialUserData');
+    localStorage.removeItem(StorageKeys.SOCIAL_USER_DATA);
     this.authService.loggedInUserData.next(null);
     this.router.navigate(['/login']);
   }

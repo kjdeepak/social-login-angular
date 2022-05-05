@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { AuthService } from '../_core/services/auth.service';
 

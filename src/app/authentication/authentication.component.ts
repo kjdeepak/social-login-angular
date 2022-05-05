@@ -6,6 +6,8 @@ import {
   SocialAuthService,
 } from 'angularx-social-login';
 import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { Title } from '@angular/platform-browser';
+import { AuthService } from '../_core/services/auth.service';
 
 @Component({
   selector: 'app-authentication',
@@ -16,19 +18,40 @@ export class AuthenticationComponent implements OnInit {
   faGoogle = faGoogle;
   faFacebook = faFacebook;
 
-  constructor(private authService: SocialAuthService, private router: Router) {}
+  constructor(
+    private socialAuthService: SocialAuthService,
+    private router: Router,
+    private titleService: Title,
+    private authService: AuthService
+  ) {
+    this.titleService.setTitle('Login');
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(!!this.authService.loggedInUserData.getValue()){
+      this.router.navigate(['/dashboard']);
+    }
+  }
 
   signInWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(() => {
-      this.router.navigate(['./dashboard']);
-    });
+    this.socialAuthService
+      .signIn(GoogleLoginProvider.PROVIDER_ID)
+      .then(() => {
+        this.router.navigate(['./dashboard']);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(() => {
-      this.router.navigate(['./dashboard']);
-    });
+    this.socialAuthService
+      .signIn(FacebookLoginProvider.PROVIDER_ID)
+      .then(() => {
+        this.router.navigate(['./dashboard']);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }

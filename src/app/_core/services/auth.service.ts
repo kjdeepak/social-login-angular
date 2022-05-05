@@ -6,13 +6,23 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  readonly loggedInUserData: BehaviorSubject<SocialUser | null> =
-    new BehaviorSubject<SocialUser | null>(null);
+  loggedInUserData: BehaviorSubject<SocialUser | null> =
+    new BehaviorSubject<SocialUser | null>(this.isLoggedIn());
   readonly loggedInUserData$ = this.loggedInUserData.asObservable();
 
   constructor(private socialAuthService: SocialAuthService) {
     this.socialAuthService.authState.subscribe((user) => {
+      if (!!user) {
+        localStorage.setItem('socialUserData', JSON.stringify(user));
+      }
       this.loggedInUserData.next(user);
     });
+  }
+
+  isLoggedIn(): SocialUser | null {
+    if (!!localStorage.getItem('socialUserData')) {
+      return JSON.parse(localStorage.getItem('socialUserData') as string);
+    }
+    return null;
   }
 }

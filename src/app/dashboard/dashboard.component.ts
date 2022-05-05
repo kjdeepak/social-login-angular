@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { AuthService } from '../_core/services/auth.service';
 
@@ -22,17 +23,24 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.loggedInUserData$.subscribe((userData) => {
-      this.userData = userData;
-    });
+    this.userData = this.authService.loggedInUserData.getValue();
   }
 
   signOut(): void {
-    this.socialAuthService.signOut().then(() => {
-      this.router.navigate(['/login']);
-    }).catch((err) => {
-      this.router.navigate(['/login']);
-      console.log(err);
-    });
+    this.socialAuthService
+      .signOut()
+      .then(() => {
+        this.clearUserDataAndNavigateToLoginPage();
+      })
+      .catch((err) => {
+        this.clearUserDataAndNavigateToLoginPage();
+        console.log(err);
+      });
+  }
+
+  clearUserDataAndNavigateToLoginPage(): void {
+    localStorage.removeItem('socialUserData');
+    this.authService.loggedInUserData.next(null);
+    this.router.navigate(['/login']);
   }
 }

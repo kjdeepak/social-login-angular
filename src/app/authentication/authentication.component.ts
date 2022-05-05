@@ -28,7 +28,7 @@ export class AuthenticationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(!!this.authService.loggedInUserData.getValue()){
+    if (!!this.authService.loggedInUserData.getValue()) {
       this.router.navigate(['/dashboard']);
     }
   }

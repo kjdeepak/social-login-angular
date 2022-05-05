@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: AuthenticationComponent,
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {

@@ -5,6 +5,7 @@ import {
   GoogleLoginProvider,
   SocialAuthService,
 } from 'angularx-social-login';
+import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-authentication',
@@ -12,6 +13,9 @@ import {
   styleUrls: ['./authentication.component.scss'],
 })
 export class AuthenticationComponent implements OnInit {
+  faGoogle = faGoogle;
+  faFacebook = faFacebook;
+
   constructor(private authService: SocialAuthService, private router: Router) {}
 
   ngOnInit(): void {}

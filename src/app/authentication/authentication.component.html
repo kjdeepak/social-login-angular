@@ -1,13 +1,18 @@
 <section class="container-md">
-    <div class="row justify-content-center align-items-center m-auto">
-        <div class="col-md-6">
-            <div class="border rounded-lg m-4 p-4 text-center">
-                <h1 class="text-uppercase">Social Login</h1>
-                <div class="v-stack">
-                    <button role="button" class="btn btn-outline-primary" aria-label="google-login"
-                        (click)="signInWithGoogle()">Google Login</button>
-                        <button role="button" class="btn btn-outline-secondary" aria-label="facebook-login"
-                        (click)="signInWithFB()">Facebook Login</button>
+    <div class="row justify-content-center align-items-center m-auto position-absolute"
+        style="top:0; bottom:0; left:0; right:0;">
+        <div class="col-md-8 col-lg-6 col-xl-5">
+            <div class="text-center">
+                <h1 class="text-capitalize mb-4">Social Login</h1>
+                <div class="vstack gap-3 col-sm-8 offset-sm-2 col-xl-6 offset-xl-3">
+                    <button type="button" class="btn btn-lg btn-outline-secondary" (click)="signInWithGoogle()">
+                        <fa-icon [icon]="faGoogle" class="fa-lg me-2"></fa-icon>
+                        <span>Sign in with Google</span>
+                    </button>
+                    <button type="button" class="btn btn-lg btn-outline-primary" (click)="signInWithFB()">
+                        <fa-icon [icon]="faFacebook" class="fa-lg me-2"></fa-icon>
+                        Login in with facebook
+                    </button>
                 </div>
             </div>
         </div>
